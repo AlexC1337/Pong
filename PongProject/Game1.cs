@@ -12,7 +12,7 @@ namespace PongProject
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Texture2D pongBal, pongRood, pongBlauw;
-        Vector2 pongBalPositie, pongRoodPositie, pongBlauwPositie;
+        Vector2 pongBalPositie, pongRoodPositie, pongBlauwPositie, pongBalSnelheid;
 
         public Game1()
         {
@@ -33,6 +33,7 @@ namespace PongProject
             graphics.PreferredBackBufferHeight = 616;
             graphics.ApplyChanges();
             pongBalPositie = new Vector2(300, 300);
+            pongBalSnelheid = new Vector2(2, 3);
             pongRoodPositie = new Vector2(0, 0);
             pongBlauwPositie = new Vector2(600, 0);
             base.Initialize();
@@ -89,7 +90,15 @@ namespace PongProject
             {
                 pongBlauwPositie.Y += 5;
             }
-
+            if (pongBalPositie == pongRoodPositie || pongBalPositie == pongBlauwPositie)
+            {
+                pongBalSnelheid.X = pongBalSnelheid.X * -1;
+            }
+            if (pongBalPositie.Y < 0 || pongBalPositie.Y > 616)
+            {
+                pongBalSnelheid.Y = pongBalSnelheid.Y * -1;
+            }
+            pongBalPositie = pongBalPositie + pongBalSnelheid;
 
             // TODO: Add your update logic here
 

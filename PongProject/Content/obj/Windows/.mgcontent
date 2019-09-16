@@ -4,8 +4,8 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/aleks/Documents/Gameprogrammeren/PongProject/PongProject/Content/bal.png</File>
-    <File>C:/Users/aleks/Documents/Gameprogrammeren/PongProject/PongProject/Content/blauweSpeler.png</File>
-    <File>C:/Users/aleks/Documents/Gameprogrammeren/PongProject/PongProject/Content/rodeSpeler.png</File>
+    <File>C:/Users/aleks/Documents/GitHub/Pong/PongProject/Content/bal.png</File>
+    <File>C:/Users/aleks/Documents/GitHub/Pong/PongProject/Content/blauweSpeler.png</File>
+    <File>C:/Users/aleks/Documents/GitHub/Pong/PongProject/Content/rodeSpeler.png</File>
   </SourceFiles>
 </SourceFileCollection>
