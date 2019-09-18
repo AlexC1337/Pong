@@ -54,3 +54,4 @@ C:\Users\aleks\Documents\GitHub\Pong\PongProject\obj\x86\Debug\PongProject.cspro
 C:\Users\aleks\Documents\GitHub\Pong\PongProject\obj\x86\Debug\PongProject.csproj.CopyComplete
 C:\Users\aleks\Documents\GitHub\Pong\PongProject\obj\x86\Debug\PongProject.exe
 C:\Users\aleks\Documents\GitHub\Pong\PongProject\obj\x86\Debug\PongProject.pdb
+C:\Users\aleks\Documents\GitHub\Pong\PongProject\bin\Windows\x86\Debug\Content\levens.xnb

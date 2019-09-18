@@ -11,8 +11,14 @@ namespace PongProject
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Texture2D pongBal, pongRood, pongBlauw;
-        Vector2 pongBalPositie, pongRoodPositie, pongBlauwPositie, pongBalSnelheid;
+        Texture2D pongBal, pongRood, pongBlauw, pongLevens;
+        Vector2 pongBalPositie, pongRoodPositie, pongBlauwPositie, pongBalSnelheid, pongBlauwLevensPositie, pongRoodLevensPositie;
+        int windowHoogte, windowBreedte;
+        int pongRoodLevens = 3;
+        int pongBlauwLevens = 3;
+        int pongBatHoogte = 96;
+        int pongBreedte = 16;
+        int pongBalHoogte = 16;
 
         public Game1()
         {
@@ -29,13 +35,15 @@ namespace PongProject
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            graphics.PreferredBackBufferWidth = 616;
-            graphics.PreferredBackBufferHeight = 616;
+            windowBreedte = graphics.PreferredBackBufferWidth = 616;
+            windowHoogte = graphics.PreferredBackBufferHeight = 616;
             graphics.ApplyChanges();
             pongBalPositie = new Vector2(300, 300);
             pongBalSnelheid = new Vector2(2, 3);
             pongRoodPositie = new Vector2(0, 0);
             pongBlauwPositie = new Vector2(600, 0);
+            pongBlauwLevensPositie = new Vector2(windowBreedte/2 , windowHoogte-32);
+            pongRoodLevensPositie = new Vector2(windowBreedte/2, 0);
             base.Initialize();
         }
 
@@ -50,6 +58,7 @@ namespace PongProject
             pongBal = Content.Load<Texture2D>("bal");
             pongRood = Content.Load<Texture2D>("rodeSpeler");
             pongBlauw = Content.Load<Texture2D>("blauweSpeler");
+            pongLevens = Content.Load<Texture2D>("levens");
             // TODO: use this.Content to load your game content here
         }
 
@@ -78,7 +87,7 @@ namespace PongProject
             {
                 pongRoodPositie.Y += -5;
             }
-            if (Keyboard.GetState().IsKeyDown(Keys.S) && pongRoodPositie.Y < 520)
+            if (Keyboard.GetState().IsKeyDown(Keys.S) && pongRoodPositie.Y < (windowHoogte - pongBatHoogte) )
             {
                 pongRoodPositie.Y += 5;
             }
@@ -86,7 +95,7 @@ namespace PongProject
             {
                 pongBlauwPositie.Y += -5;
             }
-            if (Keyboard.GetState().IsKeyDown(Keys.Down) && pongBlauwPositie.Y < 520)
+            if (Keyboard.GetState().IsKeyDown(Keys.Down) && ((pongBlauwPositie.Y + pongBatHoogte) < windowHoogte))
             {
                 pongBlauwPositie.Y += 5;
             }
@@ -94,15 +103,31 @@ namespace PongProject
             {
                 pongBalSnelheid.X = pongBalSnelheid.X * -1;
             }
-            if (pongBalPositie.Y < 0 || pongBalPositie.Y > 616)
+            if (pongBalPositie.Y < 0 || pongBalPositie.Y > windowHoogte)
             {
                 pongBalSnelheid.Y = pongBalSnelheid.Y * -1;
+            }
+            if (pongBalPositie.X < -10)
+            {
+                pongRoodLevens--;
+                pongBalReset();
+            }
+            if (pongBalPositie.X > windowBreedte + 10)
+            {
+                pongBlauwLevens--;
+                pongBalReset();
+                
             }
             pongBalPositie = pongBalPositie + pongBalSnelheid;
 
             // TODO: Add your update logic here
 
             base.Update(gameTime);
+        }
+
+        void pongBalReset()
+        {
+            pongBalPositie = new Vector2(windowBreedte / 2, windowHoogte / 2);
         }
 
         /// <summary>
@@ -116,6 +141,14 @@ namespace PongProject
             spriteBatch.Draw(pongBal, pongBalPositie, Color.White);
             spriteBatch.Draw(pongRood, pongRoodPositie, Color.White);
             spriteBatch.Draw(pongBlauw, pongBlauwPositie, Color.White);
+            for(int i = pongRoodLevens; i>0 ; i--)
+            {
+                spriteBatch.Draw(pongLevens, pongRoodLevensPositie + new Vector2(i*-32, 0), Color.White);
+            }
+            for(int i = pongBlauwLevens; i>0 ; i--)
+            {
+                spriteBatch.Draw(pongLevens, pongBlauwLevensPositie + new Vector2(i*32, 0), Color.White);
+            }
             spriteBatch.End();
             // TODO: Add your drawing code here
             //base.Draw(gameTime);
