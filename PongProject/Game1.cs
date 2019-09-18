@@ -19,6 +19,7 @@ namespace PongProject
         int pongBatHoogte = 96;
         int pongBreedte = 16;
         int pongBalHoogte = 16;
+        bool batCollison;
 
         public Game1()
         {
@@ -99,10 +100,10 @@ namespace PongProject
             {
                 pongBlauwPositie.Y += 5;
             }
-            if (pongBalPositie == pongRoodPositie || pongBalPositie == pongBlauwPositie)
-            {
-                pongBalSnelheid.X = pongBalSnelheid.X * -1;
-            }
+            //if (pongBalPositie == pongRoodPositie || pongBalPositie == pongBlauwPositie)
+            //{
+            //    pongBalSnelheid.X = pongBalSnelheid.X * -1;
+            //}
             if (pongBalPositie.Y < 0 || pongBalPositie.Y > windowHoogte)
             {
                 pongBalSnelheid.Y = pongBalSnelheid.Y * -1;
@@ -118,6 +119,11 @@ namespace PongProject
                 pongBalReset();
                 
             }
+            if (batCollision)
+            {
+                pongBalSnelheid.X *= -1;
+            }
+            if((pongRoodPositie.Y + pongBatHoogte) < pongBalPositie.Y < pongRoodPositie.X)
             pongBalPositie = pongBalPositie + pongBalSnelheid;
 
             // TODO: Add your update logic here
