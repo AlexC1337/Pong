@@ -12,14 +12,15 @@ namespace PongProject
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Texture2D pongBal, pongRood, pongBlauw, pongLevens;
-        Vector2 pongBalPositie, pongRoodPositie, pongBlauwPositie, pongBalSnelheid, pongBlauwLevensPositie, pongRoodLevensPositie;
+        Vector2 pongBalPositie, pongRoodPositie, pongBlauwPositie, pongBalSnelheid, pongBalBeginSnelheid, pongBlauwLevensPositie, pongRoodLevensPositie;
+        Rectangle pongBlauwBat, pongRoodBat, pongBalHitbox;
         int windowHoogte, windowBreedte;
         int pongRoodLevens = 3;
         int pongBlauwLevens = 3;
         int pongBatHoogte = 96;
-        int pongBreedte = 16;
+        int pongBatBreedte = 16;
+        int pongBalBreedte = 16;
         int pongBalHoogte = 16;
-        bool batCollison;
 
         public Game1()
         {
@@ -40,14 +41,14 @@ namespace PongProject
             windowHoogte = graphics.PreferredBackBufferHeight = 616;
             graphics.ApplyChanges();
             pongBalPositie = new Vector2(300, 300);
-            pongBalSnelheid = new Vector2(2, 3);
+            pongBalBeginSnelheid = new Vector2(2, 3);
+            pongBalSnelheid = pongBalBeginSnelheid;
             pongRoodPositie = new Vector2(0, 0);
             pongBlauwPositie = new Vector2(600, 0);
             pongBlauwLevensPositie = new Vector2(windowBreedte/2 , windowHoogte-32);
             pongRoodLevensPositie = new Vector2(windowBreedte/2, 0);
             base.Initialize();
         }
-
         /// <summary>
         /// LoadContent will be called once per game and is the place to load
         /// all of your content.
@@ -78,7 +79,7 @@ namespace PongProject
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
-        {
+        { 
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
                 Exit();
@@ -100,13 +101,10 @@ namespace PongProject
             {
                 pongBlauwPositie.Y += 5;
             }
-            //if (pongBalPositie == pongRoodPositie || pongBalPositie == pongBlauwPositie)
-            //{
-            //    pongBalSnelheid.X = pongBalSnelheid.X * -1;
-            //}
-            if (pongBalPositie.Y < 0 || pongBalPositie.Y > windowHoogte)
+
+            if (pongBalPositie.Y < 0 || pongBalPositie.Y > windowHoogte - 0)
             {
-                pongBalSnelheid.Y = pongBalSnelheid.Y * -1;
+                pongBalSnelheid.Y *= -1;
             }
             if (pongBalPositie.X < -10)
             {
@@ -117,13 +115,24 @@ namespace PongProject
             {
                 pongBlauwLevens--;
                 pongBalReset();
-                
             }
-            if (batCollision)
+            if (pongRoodLevens == 0)
             {
-                pongBalSnelheid.X *= -1;
+               // BlauwWint();
             }
-            if((pongRoodPositie.Y + pongBatHoogte) < pongBalPositie.Y < pongRoodPositie.X)
+            if (pongBlauwLevens == 0)
+            {
+               // RoodWint();
+            }
+            pongBlauwBat = new Rectangle((int)pongBlauwPositie.X, (int)pongBlauwPositie.Y, pongBatBreedte, pongBatHoogte);
+            pongRoodBat = new Rectangle((int)pongRoodPositie.X, (int)pongRoodPositie.Y, pongBatBreedte, pongBatHoogte);
+            pongBalHitbox = new Rectangle((int)pongBalPositie.X, (int)pongBalPositie.Y, pongBalBreedte, pongBalHoogte);
+
+            if (pongBlauwBat.Intersects(pongBalHitbox) || pongRoodBat.Intersects(pongBalHitbox))
+            {
+               double v = pongBalSnelheid.X;
+               pongBalSnelheid.X = (int) (v * -1.5);
+            }
             pongBalPositie = pongBalPositie + pongBalSnelheid;
 
             // TODO: Add your update logic here
@@ -134,6 +143,7 @@ namespace PongProject
         void pongBalReset()
         {
             pongBalPositie = new Vector2(windowBreedte / 2, windowHoogte / 2);
+            pongBalSnelheid = pongBalBeginSnelheid;
         }
 
         /// <summary>
