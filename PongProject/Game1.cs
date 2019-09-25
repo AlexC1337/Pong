@@ -14,6 +14,7 @@ namespace PongProject
         Texture2D pongBal, pongRood, pongBlauw, pongLevens;
         Vector2 pongBalPositie, pongRoodPositie, pongBlauwPositie, pongBalSnelheid, pongBalBeginSnelheid, pongBlauwLevensPositie, pongRoodLevensPositie;
         Rectangle pongBlauwBat, pongRoodBat, pongBalHitbox;
+        SpriteFont font;
         int windowHoogte, windowBreedte;
         int pongRoodLevens = 3;
         int pongBlauwLevens = 3;
@@ -21,6 +22,8 @@ namespace PongProject
         int pongBatBreedte = 16;
         int pongBalBreedte = 16;
         int pongBalHoogte = 16;
+        int winner = -1;
+        int gameState = 0;
 
         public Game1()
         {
@@ -61,6 +64,7 @@ namespace PongProject
             pongRood = Content.Load<Texture2D>("rodeSpeler");
             pongBlauw = Content.Load<Texture2D>("blauweSpeler");
             pongLevens = Content.Load<Texture2D>("levens");
+            font = Content.Load<SpriteFont>("Font");
             // TODO: use this.Content to load your game content here
         }
 
@@ -79,65 +83,72 @@ namespace PongProject
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
-        { 
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+        {
+            if (gameState == 0)
             {
-                Exit();
+                if (Keyboard.GetState().IsKeyDown(Keys.Space)) gameState = 1;
             }
+            else
+            {
+                if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+                {
+                    Exit();
+                }
 
-            if (Keyboard.GetState().IsKeyDown(Keys.W) && pongRoodPositie.Y > 0)
-            {
-                pongRoodPositie.Y += -5;
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.S) && pongRoodPositie.Y < (windowHoogte - pongBatHoogte) )
-            {
-                pongRoodPositie.Y += 5;
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.Up) && pongBlauwPositie.Y > 0)
-            {
-                pongBlauwPositie.Y += -5;
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.Down) && ((pongBlauwPositie.Y + pongBatHoogte) < windowHoogte))
-            {
-                pongBlauwPositie.Y += 5;
-            }
+                if (Keyboard.GetState().IsKeyDown(Keys.W) && pongRoodPositie.Y > 0)
+                {
+                    pongRoodPositie.Y += -5;
+                }
+                if (Keyboard.GetState().IsKeyDown(Keys.S) && pongRoodPositie.Y < (windowHoogte - pongBatHoogte))
+                {
+                    pongRoodPositie.Y += 5;
+                }
+                if (Keyboard.GetState().IsKeyDown(Keys.Up) && pongBlauwPositie.Y > 0)
+                {
+                    pongBlauwPositie.Y += -5;
+                }
+                if (Keyboard.GetState().IsKeyDown(Keys.Down) && ((pongBlauwPositie.Y + pongBatHoogte) < windowHoogte))
+                {
+                    pongBlauwPositie.Y += 5;
+                }
 
-            if (pongBalPositie.Y < 0 || pongBalPositie.Y > windowHoogte - 0)
-            {
-                pongBalSnelheid.Y *= -1;
-            }
-            if (pongBalPositie.X < -10)
-            {
-                pongRoodLevens--;
-                pongBalReset();
-            }
-            if (pongBalPositie.X > windowBreedte + 10)
-            {
-                pongBlauwLevens--;
-                pongBalReset();
-            }
-            if (pongRoodLevens == 0)
-            {
-               // BlauwWint();
-            }
-            if (pongBlauwLevens == 0)
-            {
-               // RoodWint();
-            }
-            pongBlauwBat = new Rectangle((int)pongBlauwPositie.X, (int)pongBlauwPositie.Y, pongBatBreedte, pongBatHoogte);
-            pongRoodBat = new Rectangle((int)pongRoodPositie.X, (int)pongRoodPositie.Y, pongBatBreedte, pongBatHoogte);
-            pongBalHitbox = new Rectangle((int)pongBalPositie.X, (int)pongBalPositie.Y, pongBalBreedte, pongBalHoogte);
+                if (pongBalPositie.Y < 0 || pongBalPositie.Y > windowHoogte - 0)
+                {
+                    pongBalSnelheid.Y *= -1;
+                }
+                if (pongBalPositie.X < -10)
+                {
+                    pongRoodLevens--;
+                    pongBalReset();
+                }
+                if (pongBalPositie.X > windowBreedte + 10)
+                {
+                    pongBlauwLevens--;
+                    pongBalReset();
+                }
+                if (pongRoodLevens == 0)
+                {
+                    winner = 0;
+                }
+                if (pongBlauwLevens == 0)
+                {
+                    winner = 1;
+                }
+                pongBlauwBat = new Rectangle((int)pongBlauwPositie.X, (int)pongBlauwPositie.Y, pongBatBreedte, pongBatHoogte);
+                pongRoodBat = new Rectangle((int)pongRoodPositie.X, (int)pongRoodPositie.Y, pongBatBreedte, pongBatHoogte);
+                pongBalHitbox = new Rectangle((int)pongBalPositie.X, (int)pongBalPositie.Y, pongBalBreedte, pongBalHoogte);
 
-            if (pongBlauwBat.Intersects(pongBalHitbox) || pongRoodBat.Intersects(pongBalHitbox))
-            {
-               double v = pongBalSnelheid.X;
-               pongBalSnelheid.X = (int) (v * -1.5);
+                if (pongBlauwBat.Intersects(pongBalHitbox) || pongRoodBat.Intersects(pongBalHitbox))
+                {
+                    double v = pongBalSnelheid.X;
+                    pongBalSnelheid.X = (int)(v * -1.5);
+                }
+                pongBalPositie = pongBalPositie + pongBalSnelheid;
+
+                // TODO: Add your update logic here
+
+                base.Update(gameTime);
             }
-            pongBalPositie = pongBalPositie + pongBalSnelheid;
-
-            // TODO: Add your update logic here
-
-            base.Update(gameTime);
         }
 
         void pongBalReset()
@@ -152,22 +163,55 @@ namespace PongProject
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.White);
-            spriteBatch.Begin();
-            spriteBatch.Draw(pongBal, pongBalPositie, Color.White);
-            spriteBatch.Draw(pongRood, pongRoodPositie, Color.White);
-            spriteBatch.Draw(pongBlauw, pongBlauwPositie, Color.White);
-            for(int i = pongRoodLevens; i>0 ; i--)
+            if (gameState == 0) gameStart();
+            else
             {
-                spriteBatch.Draw(pongLevens, pongRoodLevensPositie + new Vector2(i*-32, 0), Color.White);
+                if (winner == -1)
+                {
+                    GraphicsDevice.Clear(Color.White);
+                    spriteBatch.Begin();
+                    spriteBatch.Draw(pongBal, pongBalPositie, Color.White);
+                    spriteBatch.Draw(pongRood, pongRoodPositie, Color.White);
+                    spriteBatch.Draw(pongBlauw, pongBlauwPositie, Color.White);
+                    for (int i = pongRoodLevens; i > 0; i--)
+                    {
+                        spriteBatch.Draw(pongLevens, pongRoodLevensPositie + new Vector2(i * -32, 0), Color.White);
+                    }
+                    for (int i = pongBlauwLevens; i > 0; i--)
+                    {
+                        spriteBatch.Draw(pongLevens, pongBlauwLevensPositie + new Vector2(i * 32, 0), Color.White);
+                    }
+                    spriteBatch.End();
+                }
+                else gameEnd();
             }
-            for(int i = pongBlauwLevens; i>0 ; i--)
-            {
-                spriteBatch.Draw(pongLevens, pongBlauwLevensPositie + new Vector2(i*32, 0), Color.White);
-            }
-            spriteBatch.End();
             // TODO: Add your drawing code here
             //base.Draw(gameTime);
+        }
+        public void gameEnd()
+        {
+            if (winner == 1)
+            {
+                GraphicsDevice.Clear(Color.Red);
+                spriteBatch.Begin();
+                spriteBatch.DrawString(font, "Red wins!",new Vector2(300,300), Color.White);
+                spriteBatch.End();
+            }
+            else
+            {
+                GraphicsDevice.Clear(Color.Blue);
+                spriteBatch.Begin();
+                spriteBatch.DrawString(font, "Blue wins!", new Vector2(300, 300), Color.White);
+                spriteBatch.End();
+            }
+        }
+
+        public void gameStart()
+        {
+            GraphicsDevice.Clear(Color.White);
+            spriteBatch.Begin();
+            spriteBatch.DrawString(font, "Press space to start the game!", new Vector2(200, 300), Color.Black);
+            spriteBatch.End();
         }
     }
 }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/aleks/Documents/GitHub/Pong/PongProject/Content/bal.png</SourceFile>
-  <SourceTime>2010-09-13T13:17:52+02:00</SourceTime>
-  <DestFile>C:/Users/aleks/Documents/GitHub/Pong/PongProject/Content/bin/Windows/bal.xnb</DestFile>
-  <DestTime>2019-09-16T18:07:46.7578124+02:00</DestTime>
+  <SourceFile>D:/CSE Bigger files/Github projects/Pong/PongProject/Content/bal.png</SourceFile>
+  <SourceTime>2019-09-18T14:16:42.2315133+02:00</SourceTime>
+  <DestFile>D:/CSE Bigger files/Github projects/Pong/PongProject/Content/bin/Windows/bal.xnb</DestFile>
+  <DestTime>2019-09-25T11:26:18.0818481+02:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2017-03-01T16:05:36+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
