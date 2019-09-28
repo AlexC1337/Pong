@@ -4,10 +4,10 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>D:/CSE Bigger files/Github projects/Pong/PongProject/Content/bal.png</File>
-    <File>D:/CSE Bigger files/Github projects/Pong/PongProject/Content/blauweSpeler.png</File>
-    <File>D:/CSE Bigger files/Github projects/Pong/PongProject/Content/rodeSpeler.png</File>
-    <File>D:/CSE Bigger files/Github projects/Pong/PongProject/Content/levens.png</File>
-    <File>D:/CSE Bigger files/Github projects/Pong/PongProject/Content/Font.spritefont</File>
+    <File>D:/Documents/GitHub/Pong/PongProject/Content/bal.png</File>
+    <File>D:/Documents/GitHub/Pong/PongProject/Content/blauweSpeler.png</File>
+    <File>D:/Documents/GitHub/Pong/PongProject/Content/rodeSpeler.png</File>
+    <File>D:/Documents/GitHub/Pong/PongProject/Content/levens.png</File>
+    <File>D:/Documents/GitHub/Pong/PongProject/Content/Font.spritefont</File>
   </SourceFiles>
 </SourceFileCollection>

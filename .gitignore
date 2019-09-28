@@ -1,0 +1,12 @@
+
+*.cache
+*.cache
+*.cache
+*.pdb
+*.exe
+PongProject/obj/x86/Debug/PongProject.csproj.FileListAbsolute.txt
+*.cache
+*.mgcontent
+*.xml
+*.ide-wal
+*.ide-shm

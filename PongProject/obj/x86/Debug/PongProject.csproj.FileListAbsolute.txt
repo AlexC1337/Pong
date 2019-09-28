@@ -85,3 +85,33 @@ D:\CSE Bigger files\Github projects\Pong\PongProject\obj\x86\Debug\PongProject.c
 D:\CSE Bigger files\Github projects\Pong\PongProject\obj\x86\Debug\PongProject.exe
 D:\CSE Bigger files\Github projects\Pong\PongProject\obj\x86\Debug\PongProject.pdb
 D:\CSE Bigger files\Github projects\Pong\PongProject\bin\Windows\x86\Debug\Content\Font.xnb
+D:\Documents\GitHub\Pong\PongProject\bin\Windows\x86\Debug\Content\bal.xnb
+D:\Documents\GitHub\Pong\PongProject\bin\Windows\x86\Debug\Content\blauweSpeler.xnb
+D:\Documents\GitHub\Pong\PongProject\bin\Windows\x86\Debug\Content\Font.xnb
+D:\Documents\GitHub\Pong\PongProject\bin\Windows\x86\Debug\Content\levens.xnb
+D:\Documents\GitHub\Pong\PongProject\bin\Windows\x86\Debug\Content\rodeSpeler.xnb
+D:\Documents\GitHub\Pong\PongProject\bin\Windows\x86\Debug\PongProject.exe
+D:\Documents\GitHub\Pong\PongProject\bin\Windows\x86\Debug\PongProject.pdb
+D:\Documents\GitHub\Pong\PongProject\bin\Windows\x86\Debug\MonoGame.Framework.dll
+D:\Documents\GitHub\Pong\PongProject\bin\Windows\x86\Debug\SharpDX.MediaFoundation.dll
+D:\Documents\GitHub\Pong\PongProject\bin\Windows\x86\Debug\SharpDX.dll
+D:\Documents\GitHub\Pong\PongProject\bin\Windows\x86\Debug\SharpDX.XAudio2.dll
+D:\Documents\GitHub\Pong\PongProject\bin\Windows\x86\Debug\SharpDX.DXGI.dll
+D:\Documents\GitHub\Pong\PongProject\bin\Windows\x86\Debug\SharpDX.Direct3D11.dll
+D:\Documents\GitHub\Pong\PongProject\bin\Windows\x86\Debug\SharpDX.Direct2D1.dll
+D:\Documents\GitHub\Pong\PongProject\bin\Windows\x86\Debug\SharpDX.XInput.dll
+D:\Documents\GitHub\Pong\PongProject\bin\Windows\x86\Debug\SharpDX.Direct3D9.dll
+D:\Documents\GitHub\Pong\PongProject\bin\Windows\x86\Debug\MonoGame.Framework.xml
+D:\Documents\GitHub\Pong\PongProject\bin\Windows\x86\Debug\SharpDX.MediaFoundation.xml
+D:\Documents\GitHub\Pong\PongProject\bin\Windows\x86\Debug\SharpDX.xml
+D:\Documents\GitHub\Pong\PongProject\bin\Windows\x86\Debug\SharpDX.XAudio2.xml
+D:\Documents\GitHub\Pong\PongProject\bin\Windows\x86\Debug\SharpDX.DXGI.xml
+D:\Documents\GitHub\Pong\PongProject\bin\Windows\x86\Debug\SharpDX.Direct3D11.xml
+D:\Documents\GitHub\Pong\PongProject\bin\Windows\x86\Debug\SharpDX.Direct2D1.xml
+D:\Documents\GitHub\Pong\PongProject\bin\Windows\x86\Debug\SharpDX.XInput.xml
+D:\Documents\GitHub\Pong\PongProject\bin\Windows\x86\Debug\SharpDX.Direct3D9.xml
+D:\Documents\GitHub\Pong\PongProject\obj\x86\Debug\PongProject.csprojAssemblyReference.cache
+D:\Documents\GitHub\Pong\PongProject\obj\x86\Debug\PongProject.csproj.CoreCompileInputs.cache
+D:\Documents\GitHub\Pong\PongProject\obj\x86\Debug\PongProject.csproj.CopyComplete
+D:\Documents\GitHub\Pong\PongProject\obj\x86\Debug\PongProject.exe
+D:\Documents\GitHub\Pong\PongProject\obj\x86\Debug\PongProject.pdb

@@ -24,6 +24,7 @@ namespace PongProject
         int pongBalHoogte = 16;
         int winner = -1;
         int gameState = 0;
+        int AI = 0;
 
         public Game1()
         {
@@ -48,8 +49,10 @@ namespace PongProject
             pongBalSnelheid = pongBalBeginSnelheid;
             pongRoodPositie = new Vector2(0, 0);
             pongBlauwPositie = new Vector2(600, 0);
-            pongBlauwLevensPositie = new Vector2(windowBreedte/2 , windowHoogte-32);
-            pongRoodLevensPositie = new Vector2(windowBreedte/2, 0);
+            pongBlauwLevensPositie = new Vector2(windowBreedte / 2, windowHoogte - 32);
+            pongRoodLevensPositie = new Vector2(windowBreedte / 2, 0);
+            KeyboardState currentKeyboardState;
+
             base.Initialize();
         }
         /// <summary>
@@ -86,24 +89,40 @@ namespace PongProject
         {
             if (gameState == 0)
             {
+                if (Keyboard.GetState().IsKeyDown(Keys.G)) AI = 1; //toggle AI
+                if (Keyboard.GetState().IsKeyDown(Keys.H)) AI = 0; //toggle AI
                 if (Keyboard.GetState().IsKeyDown(Keys.Space)) gameState = 1;
             }
-            else
+            else if (gameState == 1)
             {
                 if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 {
                     Exit();
                 }
-
-                if (Keyboard.GetState().IsKeyDown(Keys.W) && pongRoodPositie.Y > 0)
+                if (AI == 0)
                 {
-                    pongRoodPositie.Y += -5;
+                    if (Keyboard.GetState().IsKeyDown(Keys.W) && pongRoodPositie.Y > 0)
+                    {
+                        pongRoodPositie.Y += -5;
+                    }
+                    if (Keyboard.GetState().IsKeyDown(Keys.S) && pongRoodPositie.Y < (windowHoogte - pongBatHoogte))
+                    {
+                        pongRoodPositie.Y += 5;
+                    }
                 }
-                if (Keyboard.GetState().IsKeyDown(Keys.S) && pongRoodPositie.Y < (windowHoogte - pongBatHoogte))
+                else if(AI == 1) //als AI op 1 staat beweegt het rode batje automatisch;
                 {
-                    pongRoodPositie.Y += 5;
+                    if(pongBalPositie.Y > pongRoodPositie.Y && pongRoodPositie.Y < (windowHoogte - pongBatHoogte))
+                    {
+                        pongRoodPositie.Y += 5;
+                    }
+                    if (pongBalPositie.Y < pongRoodPositie.Y && pongRoodPositie.Y > 0)
+                    {
+                        pongRoodPositie.Y += -5;
+                    }
                 }
                 if (Keyboard.GetState().IsKeyDown(Keys.Up) && pongBlauwPositie.Y > 0)
+
                 {
                     pongBlauwPositie.Y += -5;
                 }
@@ -112,7 +131,7 @@ namespace PongProject
                     pongBlauwPositie.Y += 5;
                 }
 
-                if (pongBalPositie.Y < 0 || pongBalPositie.Y > windowHoogte - 0)
+                if (pongBalPositie.Y < 0 || pongBalPositie.Y > windowHoogte - pongBalHoogte)
                 {
                     pongBalSnelheid.Y *= -1;
                 }
@@ -144,9 +163,6 @@ namespace PongProject
                     pongBalSnelheid.X = (int)(v * -1.5);
                 }
                 pongBalPositie = pongBalPositie + pongBalSnelheid;
-
-                // TODO: Add your update logic here
-
                 base.Update(gameTime);
             }
         }
@@ -194,7 +210,7 @@ namespace PongProject
             {
                 GraphicsDevice.Clear(Color.Red);
                 spriteBatch.Begin();
-                spriteBatch.DrawString(font, "Red wins!",new Vector2(300,300), Color.White);
+                spriteBatch.DrawString(font, "Red wins!", new Vector2(300, 300), Color.White);
                 spriteBatch.End();
             }
             else
@@ -211,6 +227,15 @@ namespace PongProject
             GraphicsDevice.Clear(Color.White);
             spriteBatch.Begin();
             spriteBatch.DrawString(font, "Press space to start the game!", new Vector2(200, 300), Color.Black);
+            if(AI == 1)
+            {
+                spriteBatch.DrawString(font, "AI: Enabled, press H to disable", new Vector2(200, 350), Color.Black);
+
+            }
+            else
+            {
+                spriteBatch.DrawString(font, "AI: Disabled, press G to enable", new Vector2(200, 350), Color.Gray);
+            }
             spriteBatch.End();
         }
     }
